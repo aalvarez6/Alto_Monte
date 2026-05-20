@@ -1,0 +1,142 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+@layer base {
+  html { scroll-behavior: smooth; }
+  body {
+    background: #F7F4EF;
+    font-family: 'DM Sans', system-ui, sans-serif;
+    color: #2C2C2C;
+    -webkit-font-smoothing: antialiased;
+  }
+  ::-webkit-scrollbar { width: 4px; }
+  ::-webkit-scrollbar-track { background: #F7F4EF; }
+  ::-webkit-scrollbar-thumb { background: #7BAE8A88; border-radius: 4px; }
+}
+
+:root {
+  --verde-musgo:   #4A6741;
+  --verde-agua:    #7BAE8A;
+  --lavanda:       #9B8FB5;
+  --rosa:          #D4A5A5;
+  --cielo:         #A8C5C2;
+  --arena:         #E8D5B7;
+  --niebla:        #F7F4EF;
+  --carbon:        #2C2C2C;
+  --oro:           #C9A96E;
+  --shadow-card:   0 4px 24px rgba(74,103,65,.1), 0 1px 4px rgba(0,0,0,.05);
+  --shadow-lift:   0 12px 40px rgba(74,103,65,.18), 0 2px 8px rgba(0,0,0,.07);
+}
+
+@layer components {
+  .glass {
+    background: rgba(247,244,239,.78);
+    backdrop-filter: blur(14px);
+    border: 1px solid rgba(123,174,138,.22);
+  }
+  .glass-dark {
+    background: rgba(44,62,48,.8);
+    backdrop-filter: blur(14px);
+    border: 1px solid rgba(123,174,138,.28);
+  }
+  .btn-primary {
+    @apply inline-flex items-center gap-2 px-6 py-3 rounded-lg font-medium text-sm no-underline transition-all duration-300 cursor-pointer;
+    background: var(--verde-agua);
+    color: #2C2C2C;
+    box-shadow: 0 4px 16px rgba(123,174,138,.35);
+  }
+  .btn-primary:hover {
+    background: var(--arena);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 28px rgba(123,174,138,.4);
+  }
+  .btn-ghost {
+    @apply inline-flex items-center gap-2 px-6 py-3 rounded-lg font-medium text-sm no-underline transition-all duration-300 cursor-pointer;
+    border: 1px solid rgba(232,213,183,.5);
+    color: var(--arena);
+    background: transparent;
+  }
+  .btn-ghost:hover {
+    border-color: var(--verde-agua);
+    color: var(--verde-agua);
+    background: rgba(123,174,138,.08);
+  }
+  .btn-outline {
+    @apply inline-flex items-center gap-2 px-6 py-3 rounded-lg font-medium text-sm no-underline transition-all duration-300 cursor-pointer;
+    border: 1px solid rgba(123,174,138,.3);
+    color: var(--verde-musgo);
+    background: transparent;
+  }
+  .btn-outline:hover {
+    background: rgba(123,174,138,.08);
+    border-color: var(--verde-agua);
+  }
+  .metric-card {
+    background: white;
+    border: 1px solid rgba(123,174,138,.18);
+    border-radius: 16px;
+    padding: 20px;
+    box-shadow: var(--shadow-card);
+    transition: all .3s cubic-bezier(.4,0,.2,1);
+  }
+  .metric-card:hover {
+    border-color: rgba(123,174,138,.4);
+    box-shadow: var(--shadow-lift);
+    transform: translateY(-2px);
+  }
+  .eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: .68rem;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    color: var(--verde-agua);
+  }
+}
+
+@keyframes breathe   { 0%,100%{transform:scale(1);opacity:.9}50%{transform:scale(1.03);opacity:1} }
+@keyframes float     { 0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)} }
+@keyframes wIn       { from{opacity:0;filter:blur(6px);transform:translateY(12px)}to{opacity:1;filter:blur(0);transform:translateY(0)} }
+@keyframes pulseSoft { 0%,100%{opacity:.5;transform:scale(1)}50%{opacity:1;transform:scale(1.06)} }
+@keyframes flowDash  { from{stroke-dashoffset:400}to{stroke-dashoffset:0} }
+@keyframes shimBar   { from{background-position:-200% center}to{background-position:200% center} }
+@keyframes particle  { 0%{opacity:0;transform:translateY(0) scale(0)}50%{opacity:.7;transform:translateY(-50px) scale(1)}100%{opacity:0;transform:translateY(-100px) scale(0)} }
+@keyframes scrollL   { 0%{transform:scaleY(0);transform-origin:top}50%{transform:scaleY(1);transform-origin:top}51%{transform:scaleY(1);transform-origin:bottom}100%{transform:scaleY(0);transform-origin:bottom} }
+
+.anim-in   { animation: wIn .8s cubic-bezier(.4,0,.2,1) both; }
+.anim-d1   { animation: wIn .8s cubic-bezier(.4,0,.2,1) .15s both; }
+.anim-d2   { animation: wIn .8s cubic-bezier(.4,0,.2,1) .30s both; }
+.anim-d3   { animation: wIn .8s cubic-bezier(.4,0,.2,1) .45s both; }
+.anim-d4   { animation: wIn .8s cubic-bezier(.4,0,.2,1) .60s both; }
+.anim-d5   { animation: wIn .8s cubic-bezier(.4,0,.2,1) .75s both; }
+.anim-breathe  { animation: breathe 6s ease-in-out infinite; }
+.anim-float    { animation: float 5s ease-in-out infinite; }
+.anim-pulse    { animation: pulseSoft 2.5s ease-in-out infinite; }
+.shimmer-bar {
+  background: linear-gradient(90deg, var(--verde-agua), var(--cielo), var(--lavanda));
+  background-size: 200% auto;
+  animation: shimBar 2.5s linear infinite;
+}
+.scroll-line { animation: scrollL 1.8s ease-in-out infinite; }
+
+/* Leaflet warm override */
+.leaflet-container { background: #EDE8DE !important; }
+.leaflet-tile { filter: sepia(.2) saturate(.85) brightness(1.06); }
+.leaflet-popup-content-wrapper {
+  background: rgba(247,244,239,.97) !important;
+  border: 1px solid rgba(123,174,138,.35) !important;
+  color: #2C2C2C !important;
+  border-radius: 14px !important;
+  box-shadow: 0 8px 32px rgba(74,103,65,.15) !important;
+}
+.leaflet-popup-tip { background: rgba(247,244,239,.97) !important; }
+.leaflet-control-attribution { display:none; }
+.leaflet-control-zoom a { background: rgba(247,244,239,.95) !important; color:#4A6741 !important; border-color:rgba(123,174,138,.3) !important; }
+
+/* Recharts warm override */
+.recharts-cartesian-grid-horizontal line,
+.recharts-cartesian-grid-vertical line { stroke: rgba(123,174,138,.15) !important; }
